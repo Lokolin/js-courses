@@ -1,20 +1,22 @@
 export function sum(a, b) {
-  a = checkType(a);
-  b = checkType(b);
+  a = transformToNum(a);
+  b = transformToNum(b);
+  if (isNaN(a) || isNaN(b)) {
+    return NaN;
+  }
   return a + b;
 }
 
 export function powerWithClosure(exponent) {
-  return exponent => {
-    exponent = checkType(exponent);
+  return power => {
+    exponent = transformToNum(exponent);
+    if (isNaN(exponent)) {
+      return NaN;
+    }
     return exponent * exponent;
   };
 }
 
-var checkType = num => {
-  typeof num === 'number' ? num : (num = Number(num));
-  if (isNaN(num)) {
-    throw new Error('One of number is incorrect');
-  }
-  return num;
+var transformToNum = num => {
+  return typeof num === 'number' ? num : (num = Number(num));
 };

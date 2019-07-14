@@ -94,16 +94,12 @@ describe('transformData', () => {
     });
   });
 
-  test('should throw an error that it is not an array', () => {
-    expect(() => {
-      transformData(null);
-    }).toThrowError('Not an array');
+  test('should return null if it is not an array', () => {
+    expect(transformData(2)).toBe(null);
   });
 
-  test('shold remove all garbages and create key for null or undefined elements', () => {
+  test('shold remove all garbage values and elements with null or undefined', () => {
     expect(transformData(startShape2)).toEqual({
-      0: 'old',
-      1: 'bacon',
       kids: 'gazillions',
       name: 'jared',
     });
